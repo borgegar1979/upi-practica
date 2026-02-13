@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Universidad Politécnica Internacional</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:   #0d2a6b;
+      --blue:   #1a4db3;
+      --green:  #7ec63e;
+      --orange: #f58220;
+      --white:  #ffffff;
+      --light:  #f4f7fb;
+    }
+
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background: var(--white);
+      color: #222;
+    }
+
+    /* ─── TOPBAR ─── */
+    header {
+      background: var(--navy);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      height: 60px;
+      position: sticky;
+      top: 0;
+      z-index: 999;
+    }
+    .logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    /* SVG logo inline */
+    .logo-svg { width: 52px; height: 40px; }
+    .logo-text {
+      color: var(--white);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1.3;
+      letter-spacing: .5px;
+    }
+    .auth-area {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .auth-area input {
+      height: 30px;
+      padding: 0 10px;
+      border: none;
+      border-radius: 4px;
+      font-size: 13px;
+      width: 130px;
+      background: #e8eef8;
+      color: #333;
+    }
+    .btn-login {
+      background: #e53935;
+      color: var(--white);
+      border: none;
+      border-radius: 4px;
+      padding: 6px 18px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      cursor: pointer;
+      transition: background .2s;
+    }
+    .btn-login:hover { background: #c62828; }
+    .search-icon {
+      color: var(--white);
+      font-size: 18px;
+      cursor: pointer;
+      margin-right: 6px;
+    }
+
+    /* ─── SLIDER ─── */
+    .slider-section {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+    }
+    .slides { display: flex; transition: transform .5s ease; }
+    .slide {
+      min-width: 100%;
+      position: relative;
+    }
+
+    /* SLIDE 1 – verde (Convertí tu Vocación) */
+    .slide-1 {
+      background: linear-gradient(135deg, #6dbf3a 0%, #8ed44f 60%, #a2e06e 100%);
+      min-height: 520px;
+      display: flex;
+      align-items: center;
+      padding: 40px 60px;
+      overflow: hidden;
+    }
+    .slide-1-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 20% 50%, rgba(255,255,255,.12) 0%, transparent 50%),
+        radial-gradient(circle at 80% 30%, rgba(255,255,255,.08) 0%, transparent 40%);
+      pointer-events: none;
+    }
+    /* world map watermark */
+    .slide-1-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='900' height='500' viewBox='0 0 900 500'%3E%3Cellipse cx='450' cy='250' rx='440' ry='240' fill='none' stroke='rgba(255,255,255,.15)' stroke-width='1.5'/%3E%3C/svg%3E");
+      background-size: cover;
+      background-position: center;
+    }
+    .slide-1-content {
+      position: relative;
+      z-index: 2;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .slide-1-logo {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 4px;
+    }
+    .slide-1-logo img {
+      width: 80px;
+      filter: brightness(0) invert(1);
+    }
+    .slide-1-logo-text {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1.4;
+      letter-spacing: 1px;
+    }
+    .slide-1-headline {
+      font-family: 'Montserrat', sans-serif;
+      line-height: 1.05;
+    }
+    .slide-1-headline .line1 {
+      font-size: clamp(36px, 5vw, 68px);
+      font-weight: 900;
+      color: var(--navy);
+    }
+    .slide-1-headline .line2 {
+      font-size: clamp(36px, 5vw, 68px);
+      font-weight: 400;
+      color: var(--white);
+    }
+    .slide-1-headline .line2 strong {
+      font-weight: 900;
+      color: var(--navy);
+    }
+    .slide-1-headline .line3 {
+      font-size: clamp(36px, 5vw, 68px);
+      font-weight: 400;
+      color: var(--white);
+    }
+    .slide-1-headline .line3 strong {
+      font-weight: 900;
+      color: var(--navy);
+    }
+    .slide-1-dates {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(16px, 2vw, 24px);
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 2;
+    }
+    .slide-1-dates span {
+      color: var(--navy);
+      font-weight: 400;
+    }
+    /* Lightbulb icon */
+    .slide-1-bulb {
+      position: absolute;
+      left: 60px;
+      bottom: 60px;
+      z-index: 2;
+    }
+    .slide-1-bulb svg { width: 100px; height: 120px; }
+
+    /* Contact bar at bottom of slide */
+    .contact-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--navy);
+      color: var(--white);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: clamp(12px, 1.5vw, 17px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 28px;
+      padding: 14px 30px;
+      z-index: 10;
+    }
+    .contact-bar a { color: var(--white); text-decoration: none; }
+    .contact-bar span { display: flex; align-items: center; gap: 8px; }
+
+    /* Student photo */
+    .slide-1-photo {
+      position: absolute;
+      right: 0;
+      bottom: 60px;
+      height: 88%;
+      z-index: 3;
+      pointer-events: none;
+      /* Use the downloaded img005.jpg */
+    }
+    .slide-1-photo img {
+      height: 100%;
+      object-fit: contain;
+      object-position: bottom;
+    }
+
+    /* SLIDE 2 – azul (Matrícula Abierta) */
+    .slide-2 {
+      background: linear-gradient(135deg, #1a4db3 0%, #0d2a6b 100%);
+      min-height: 520px;
+      display: flex;
+      align-items: center;
+      padding: 40px 60px;
+      overflow: hidden;
+    }
+    .slide-2-content {
+      position: relative;
+      z-index: 2;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .slide-2-headline {
+      font-family: 'Montserrat', sans-serif;
+      color: var(--white);
+    }
+    .slide-2-headline .big {
+      font-size: clamp(48px, 7vw, 96px);
+      font-weight: 900;
+      line-height: 1;
+      color: var(--green);
+    }
+    .slide-2-headline .sub {
+      font-size: clamp(36px, 5vw, 64px);
+      font-weight: 900;
+      line-height: 1.1;
+    }
+    .slide-2-dates {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(14px, 1.8vw, 22px);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 2;
+    }
+    .slide-2-dates span { font-weight: 400; }
+
+    /* Slider arrows */
+    .slider-arrow {
+      position: absolute;
+      top: 45%;
+      transform: translateY(-50%);
+      background: rgba(255,255,255,.25);
+      border: none;
+      color: var(--white);
+      font-size: 22px;
+      width: 36px;
+      height: 56px;
+      cursor: pointer;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .2s;
+    }
+    .slider-arrow:hover { background: rgba(255,255,255,.45); }
+    .slider-arrow.left { left: 0; border-radius: 0 4px 4px 0; }
+    .slider-arrow.right { right: 0; border-radius: 4px 0 0 4px; }
+
+    /* Dots */
+    .slider-dots {
+      position: absolute;
+      bottom: 56px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 8px;
+      z-index: 20;
+    }
+    .dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.5);
+      cursor: pointer;
+      transition: background .2s;
+    }
+    .dot.active { background: var(--white); }
+
+    /* ─── NAV PILLS ─── */
+    .nav-pills {
+      background: var(--white);
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0;
+      border-bottom: 3px solid var(--light);
+    }
+    .nav-pill {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      padding: 18px 28px;
+      text-decoration: none;
+      color: var(--navy);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      border-bottom: 3px solid transparent;
+      margin-bottom: -3px;
+      transition: color .2s, border-color .2s;
+    }
+    .nav-pill:hover { color: var(--blue); border-color: var(--blue); }
+    .nav-pill.active { color: var(--blue); border-color: var(--blue); }
+    .nav-pill-icon { font-size: 26px; }
+
+    /* ─── ABOUT SECTION ─── */
+    .about-section {
+      background: var(--light);
+      padding: 60px 80px;
+      display: flex;
+      gap: 60px;
+      align-items: center;
+    }
+    .about-text { flex: 1; }
+    .section-label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 10px;
+    }
+    .section-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(24px, 3vw, 36px);
+      font-weight: 900;
+      color: var(--navy);
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+    .section-body {
+      font-size: 15px;
+      color: #444;
+      line-height: 1.8;
+      margin-bottom: 24px;
+    }
+    .btn-primary {
+      background: var(--blue);
+      color: var(--white);
+      border: none;
+      border-radius: 6px;
+      padding: 12px 28px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: background .2s;
+    }
+    .btn-primary:hover { background: var(--navy); }
+    .about-stats {
+      flex: 0 0 300px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .stat-card {
+      background: var(--white);
+      border-radius: 10px;
+      padding: 22px 16px;
+      text-align: center;
+      box-shadow: 0 4px 16px rgba(0,0,0,.07);
+    }
+    .stat-num {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 36px;
+      font-weight: 900;
+      color: var(--blue);
+    }
+    .stat-label {
+      font-size: 12px;
+      color: #666;
+      font-weight: 600;
+      margin-top: 4px;
+    }
+
+    /* ─── CAREERS GRID ─── */
+    .careers-section {
+      padding: 60px 80px;
+      background: var(--white);
+    }
+    .careers-section .section-title { text-align: center; margin-bottom: 40px; }
+    .careers-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+    .career-card {
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 6px 20px rgba(0,0,0,.09);
+      cursor: pointer;
+      transition: transform .25s, box-shadow .25s;
+    }
+    .career-card:hover { transform: translateY(-6px); box-shadow: 0 14px 30px rgba(0,0,0,.14); }
+    .career-card-img {
+      height: 130px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 44px;
+    }
+    .career-card-body {
+      background: var(--white);
+      padding: 16px;
+    }
+    .career-card-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1.3;
+    }
+    .career-card-mode {
+      font-size: 11px;
+      color: var(--blue);
+      font-weight: 600;
+      margin-top: 6px;
+    }
+    /* Card colors */
+    .cc1 { background: linear-gradient(135deg, #1a4db3, #0d2a6b); }
+    .cc2 { background: linear-gradient(135deg, #f58220, #e06010); }
+    .cc3 { background: linear-gradient(135deg, #7ec63e, #5ba82e); }
+    .cc4 { background: linear-gradient(135deg, #0d2a6b, #1a4db3); }
+    .cc5 { background: linear-gradient(135deg, #e53935, #b71c1c); }
+    .cc6 { background: linear-gradient(135deg, #6a1fb3, #4a008b); }
+
+    /* ─── WHY UPI ─── */
+    .why-section {
+      background: var(--navy);
+      color: var(--white);
+      padding: 60px 80px;
+      text-align: center;
+    }
+    .why-section .section-title { color: var(--white); text-align: center; margin-bottom: 40px; }
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 30px;
+    }
+    .why-item { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+    .why-icon {
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+    }
+    .why-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .why-desc { font-size: 13px; color: rgba(255,255,255,.75); line-height: 1.6; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: #0a1f4e;
+      color: rgba(255,255,255,.7);
+      padding: 40px 80px;
+      display: flex;
+      gap: 60px;
+      flex-wrap: wrap;
+    }
+    .footer-col { flex: 1; min-width: 180px; }
+    .footer-logo { margin-bottom: 14px; }
+    .footer-logo img { width: 120px; filter: brightness(0) invert(1); }
+    .footer-col h4 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--white);
+      letter-spacing: .8px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .footer-col p, .footer-col a {
+      display: block;
+      font-size: 13px;
+      line-height: 2;
+      color: rgba(255,255,255,.65);
+      text-decoration: none;
+    }
+    .footer-col a:hover { color: var(--green); }
+    .footer-bottom {
+      background: #060e2a;
+      text-align: center;
+      color: rgba(255,255,255,.4);
+      font-size: 12px;
+      padding: 14px;
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 768px) {
+      .about-section { flex-direction: column; padding: 40px 20px; }
+      .about-stats { flex: 1; width: 100%; }
+      .careers-section, .why-section { padding: 40px 20px; }
+      footer { padding: 30px 20px; }
+      .slide-1, .slide-2 { padding: 30px 20px; min-height: 400px; }
+      .slide-1-photo { display: none; }
+      .contact-bar { flex-wrap: wrap; gap: 12px; font-size: 12px; }
+      .nav-pill { padding: 14px 14px; font-size: 10px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════ HEADER -->
+<header>
+  <a class="logo-wrap" href="#">
+    <svg class="logo-svg" viewBox="0 0 120 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Stylized UPI logo approximation -->
+      <circle cx="40" cy="45" r="28" stroke="#f58220" stroke-width="5" fill="none"/>
+      <circle cx="40" cy="45" r="16" stroke="#7ec63e" stroke-width="4" fill="none"/>
+      <circle cx="40" cy="45" r="6" fill="#1a4db3"/>
+      <path d="M65 25 Q95 10 110 45 Q95 80 65 65" stroke="#f58220" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <path d="M65 35 Q88 22 100 45 Q88 68 65 55" stroke="#7ec63e" stroke-width="3" fill="none" stroke-linecap="round"/>
+    </svg>
+    <span class="logo-text">Universidad<br>Politécnica<br>Internacional</span>
+  </a>
+
+  <div class="auth-area">
+    <span class="search-icon">🔍</span>
+    <input type="text" placeholder="Usuario"/>
+    <input type="password" placeholder="Contraseña"/>
+    <button class="btn-login" onclick="window.location.href='hacked.html'">Entrar</button>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════════ SLIDER -->
+<div class="slider-section">
+  <div class="slides" id="slides">
+
+    <!-- SLIDE 1: CONVERTÍ TU VOCACIÓN -->
+    <div class="slide slide-1">
+      <div class="slide-1-bg"></div>
+
+      <div class="slide-1-content">
+        <div class="slide-1-logo">
+          <svg width="80" height="60" viewBox="0 0 120 90" fill="none">
+            <circle cx="40" cy="45" r="28" stroke="#fff" stroke-width="5" fill="none"/>
+            <circle cx="40" cy="45" r="16" stroke="rgba(255,255,255,.7)" stroke-width="4" fill="none"/>
+            <circle cx="40" cy="45" r="6" fill="#fff"/>
+            <path d="M65 25 Q95 10 110 45 Q95 80 65 65" stroke="#fff" stroke-width="4" fill="none" stroke-linecap="round"/>
+            <path d="M65 35 Q88 22 100 45 Q88 68 65 55" stroke="rgba(255,255,255,.7)" stroke-width="3" fill="none" stroke-linecap="round"/>
+          </svg>
+          <span class="slide-1-logo-text">UNIVERSIDAD<br>POLITÉCNICA<br>INTERNACIONAL</span>
+        </div>
+
+        <div class="slide-1-headline">
+          <div class="line1">CONVERTÍ</div>
+          <div class="line2">TU <strong>VOCACIÓN</strong></div>
+          <div class="line3">EN TU <strong>PROFESIÓN</strong></div>
+        </div>
+
+        <div class="slide-1-dates">
+          <div><strong>Inicio de lecciones:</strong> <span>19 de enero</span></div>
+          <div><strong>Fin de lecciones:</strong> <span>03 de mayo</span></div>
+        </div>
+      </div>
+
+      <!-- Lightbulb SVG (orange head silhouette) -->
+      <div class="slide-1-bulb">
+        <svg viewBox="0 0 100 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Head silhouette -->
+          <path d="M50 100 Q20 100 20 70 Q20 40 50 30 Q80 40 80 70 Q80 100 50 100Z" stroke="#f58220" stroke-width="5" fill="none"/>
+          <!-- Rays -->
+          <line x1="50" y1="20" x2="50" y2="5"  stroke="#f58220" stroke-width="4" stroke-linecap="round"/>
+          <line x1="70" y1="28" x2="80" y2="16" stroke="#f58220" stroke-width="4" stroke-linecap="round"/>
+          <line x1="30" y1="28" x2="20" y2="16" stroke="#f58220" stroke-width="4" stroke-linecap="round"/>
+          <!-- Horizontal bars (chin) -->
+          <line x1="36" y1="105" x2="64" y2="105" stroke="#f58220" stroke-width="4" stroke-linecap="round"/>
+          <line x1="40" y1="113" x2="60" y2="113" stroke="#f58220" stroke-width="4" stroke-linecap="round"/>
+        </svg>
+      </div>
+
+      <!-- Student photo using the downloaded image -->
+      <div class="slide-1-photo">
+        <img src="img005.jpg" alt="Estudiante UPI"
+             onerror="this.style.display='none'"/>
+      </div>
+
+      <!-- Contact bar -->
+      <div class="contact-bar">
+        <span>📞 <a href="tel:40400440">4040-0440</a> / <a href="tel:40100874">4010-0874</a></span>
+        <span>📱 <a href="https://wa.me/50660400440">6040-0440</a></span>
+        <span>🌐 <a href="https://upi.ac.cr" target="_blank">upi.ac.cr</a></span>
+      </div>
+    </div>
+
+    <!-- SLIDE 2: MATRÍCULA ABIERTA -->
+    <div class="slide slide-2">
+      <div class="slide-2-content">
+        <div class="slide-1-logo">
+          <svg width="80" height="60" viewBox="0 0 120 90" fill="none">
+            <circle cx="40" cy="45" r="28" stroke="#7ec63e" stroke-width="5" fill="none"/>
+            <circle cx="40" cy="45" r="16" stroke="#f58220" stroke-width="4" fill="none"/>
+            <circle cx="40" cy="45" r="6" fill="#fff"/>
+            <path d="M65 25 Q95 10 110 45 Q95 80 65 65" stroke="#7ec63e" stroke-width="4" fill="none" stroke-linecap="round"/>
+          </svg>
+          <span class="slide-1-logo-text" style="color:#fff">UNIVERSIDAD<br>POLITÉCNICA<br>INTERNACIONAL</span>
+        </div>
+
+        <div class="slide-2-headline">
+          <div class="big">¡MATRÍCULA</div>
+          <div class="sub">ABIERTA!</div>
+        </div>
+
+        <div class="slide-2-dates">
+          <div><strong>Inicio de lecciones:</strong> <span>19 de enero</span></div>
+          <div><strong>Fin de lecciones:</strong> <span>03 de mayo</span></div>
+        </div>
+
+        <div style="margin-top:10px">
+          <a href="#" class="btn-primary">Más información</a>
+        </div>
+      </div>
+
+      <!-- Student photo slide 2 -->
+      <div class="slide-1-photo" style="bottom:60px">
+        <img src="img006.jpg" alt="Estudiante UPI Matrícula"
+             onerror="this.style.display='none'"/>
+      </div>
+
+      <div class="contact-bar">
+        <span>📞 <a href="tel:40400440">4040-0440</a> / <a href="tel:40100874">4010-0874</a></span>
+        <span>📱 <a href="https://wa.me/50660400440">6040-0440</a></span>
+        <span>🌐 <a href="https://upi.ac.cr" target="_blank">upi.ac.cr</a></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Arrows -->
+  <button class="slider-arrow left" onclick="moveSlide(-1)">&#8249;</button>
+  <button class="slider-arrow right" onclick="moveSlide(1)">&#8250;</button>
+
+  <!-- Dots -->
+  <div class="slider-dots">
+    <div class="dot active" onclick="goToSlide(0)"></div>
+    <div class="dot" onclick="goToSlide(1)"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ NAVIGATION PILLS -->
+<nav class="nav-pills">
+  <a class="nav-pill active" href="#">
+    <span class="nav-pill-icon">🏠</span> Inicio
+  </a>
+  <a class="nav-pill" href="#">
+    <span class="nav-pill-icon">🎓</span> Oferta Académica
+  </a>
+  <a class="nav-pill" href="#">
+    <span class="nav-pill-icon">📋</span> Matrícula
+  </a>
+  <a class="nav-pill" href="#">
+    <span class="nav-pill-icon">💻</span> Campus Virtual
+  </a>
+  <a class="nav-pill" href="#">
+    <span class="nav-pill-icon">📰</span> Noticias
+  </a>
+  <a class="nav-pill" href="#">
+    <span class="nav-pill-icon">📞</span> Contáctenos
+  </a>
+</nav>
+
+<!-- ═══════════════════════════════════════════ ABOUT -->
+<section class="about-section">
+  <div class="about-text">
+    <div class="section-label">¿Quiénes somos?</div>
+    <h2 class="section-title">Universidad Politécnica Internacional</h2>
+    <p class="section-body">
+      La Universidad Politécnica Internacional (UPI) es una institución de educación superior
+      comprometida con la formación integral de profesionales competentes, éticos y con
+      visión global. Ofrecemos carreras en modalidad presencial y virtual, adaptadas a
+      las necesidades del mercado laboral costarricense e internacional.
+    </p>
+    <a href="#" class="btn-primary">Conocer más</a>
+  </div>
+
+  <div class="about-stats">
+    <div class="stat-card">
+      <div class="stat-num">+20</div>
+      <div class="stat-label">Años de experiencia</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">+30</div>
+      <div class="stat-label">Carreras disponibles</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">100%</div>
+      <div class="stat-label">Modalidad virtual</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">⭐</div>
+      <div class="stat-label">Acreditada SINAES</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ CAREERS -->
+<section class="careers-section">
+  <h2 class="section-title" style="color:var(--navy)">Oferta Académica</h2>
+  <div class="careers-grid">
+    <div class="career-card">
+      <div class="career-card-img cc1">💼</div>
+      <div class="career-card-body">
+        <div class="career-card-title">Administración de Empresas</div>
+        <div class="career-card-mode">🖥️ Virtual · Presencial</div>
+      </div>
+    </div>
+    <div class="career-card">
+      <div class="career-card-img cc2">⚖️</div>
+      <div class="career-card-body">
+        <div class="career-card-title">Derecho</div>
+        <div class="career-card-mode">🖥️ Virtual · Presencial</div>
+      </div>
+    </div>
+    <div class="career-card">
+      <div class="career-card-img cc3">💻</div>
+      <div class="career-card-body">
+        <div class="career-card-title">Informática con énfasis en Sistemas</div>
+        <div class="career-card-mode">🖥️ Virtual · Presencial</div>
+      </div>
+    </div>
+    <div class="career-card">
+      <div class="career-card-img cc4">🏗️</div>
+      <div class="career-card-body">
+        <div class="career-card-title">Ingeniería Industrial</div>
+        <div class="career-card-mode">🖥️ Virtual · Presencial</div>
+      </div>
+    </div>
+    <div class="career-card">
+      <div class="career-card-img cc5">🧑‍⚕️</div>
+      <div class="career-card-body">
+        <div class="career-card-title">Enfermería</div>
+        <div class="career-card-mode">🖥️ Presencial</div>
+      </div>
+    </div>
+    <div class="career-card">
+      <div class="career-card-img cc6">🔐</div>
+      <div class="career-card-body">
+        <div class="career-card-title">Ciberseguridad</div>
+        <div class="career-card-mode">🖥️ Virtual · Presencial</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ WHY UPI -->
+<section class="why-section">
+  <h2 class="section-title">¿Por qué elegir la UPI?</h2>
+  <div class="why-grid">
+    <div class="why-item">
+      <div class="why-icon">📚</div>
+      <div class="why-title">Educación de Calidad</div>
+      <div class="why-desc">Programas actualizados y alineados con el mercado laboral actual.</div>
+    </div>
+    <div class="why-item">
+      <div class="why-icon">🌐</div>
+      <div class="why-title">Campus Virtual</div>
+      <div class="why-desc">Acceso a clases, materiales y evaluaciones desde cualquier lugar.</div>
+    </div>
+    <div class="why-item">
+      <div class="why-icon">🏅</div>
+      <div class="why-title">Docentes Expertos</div>
+      <div class="why-desc">Profesores con amplia experiencia académica y profesional.</div>
+    </div>
+    <div class="why-item">
+      <div class="why-icon">💰</div>
+      <div class="why-title">Precios Accesibles</div>
+      <div class="why-desc">Planes de pago flexibles pensados para cada estudiante.</div>
+    </div>
+    <div class="why-item">
+      <div class="why-icon">📜</div>
+      <div class="why-title">Título Reconocido</div>
+      <div class="why-desc">Grados y posgrados acreditados y reconocidos en Costa Rica.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ FOOTER -->
+<footer>
+  <div class="footer-col">
+    <div class="footer-logo">
+      <svg width="110" height="60" viewBox="0 0 120 90" fill="none">
+        <circle cx="40" cy="45" r="28" stroke="#7ec63e" stroke-width="5" fill="none"/>
+        <circle cx="40" cy="45" r="16" stroke="#f58220" stroke-width="4" fill="none"/>
+        <circle cx="40" cy="45" r="6" fill="#fff"/>
+        <path d="M65 25 Q95 10 110 45 Q95 80 65 65" stroke="#7ec63e" stroke-width="4" fill="none" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <p>Universidad Politécnica Internacional<br>Costa Rica</p>
+  </div>
+
+  <div class="footer-col">
+    <h4>Contacto</h4>
+    <p>📞 4040-0440 / 4010-0874</p>
+    <p>📱 WhatsApp: 6040-0440</p>
+    <a href="https://upi.ac.cr">🌐 upi.ac.cr</a>
+  </div>
+
+  <div class="footer-col">
+    <h4>Links Útiles</h4>
+    <a href="#">Oferta Académica</a>
+    <a href="#">Matrícula en línea</a>
+    <a href="#">Campus Virtual</a>
+    <a href="#">Noticias</a>
+    <a href="#">Contáctenos</a>
+  </div>
+
+  <div class="footer-col">
+    <h4>Redes Sociales</h4>
+    <a href="#">📘 Facebook</a>
+    <a href="#">📸 Instagram</a>
+    <a href="#">▶️ YouTube</a>
+    <a href="#">💼 LinkedIn</a>
+  </div>
+</footer>
+<div class="footer-bottom">
+  © 2025 Universidad Politécnica Internacional. Todos los derechos reservados.
+</div>
+
+<!-- ═══════════════════════════════════════════ SLIDER JS -->
+<script>
+  let current = 0;
+  const total = 2;
+  const slidesEl = document.getElementById('slides');
+  const dots = document.querySelectorAll('.dot');
+
+  function updateSlider() {
+    slidesEl.style.transform = `translateX(-${current * 100}%)`;
+    dots.forEach((d, i) => d.classList.toggle('active', i === current));
+  }
+
+  function moveSlide(dir) {
+    current = (current + dir + total) % total;
+    updateSlider();
+  }
+
+  function goToSlide(i) {
+    current = i;
+    updateSlider();
+  }
+
+  // Auto-play
+  setInterval(() => moveSlide(1), 5000);
+</script>
+
+</body>
+</html>
